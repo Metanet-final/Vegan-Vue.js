@@ -437,6 +437,8 @@ const onSetMapMarkers = (page = 1) => {
     });
 };
 
+const Swal = require("sweetalert2");
+
 const onClickButton = (idx) => {
   if (markers.value[idx].isOpen === true) markers.value[idx].isOpen = false;
   else {
@@ -456,9 +458,12 @@ checkValue.value = () => {
     subStr += "address?keyword=" + search.address;
   else {
     if (search.address.length !== 0) {
-      alert(
-        "잘못된 입력 입니다. 현재 위도 경도 데이터를 기준으로 다시 검색합니다."
-      );
+      Swal.fire({
+        title: "잘못된 주소 검색",
+        text: "잘못된 입력 입니다. 현재 위도 경도 데이터를 기준으로 다시 검색합니다.",
+        icon: "error",
+        confirmButtonText: "확인",
+      });
       search.address = "";
     }
     subStr +=
